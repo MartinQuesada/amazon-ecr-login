@@ -108,7 +108,8 @@ async function run() {
 
       // output the registry URI if this action is doing a single registry login
       if (authTokenResponse.authorizationData.length === 1) {
-        core.setOutput(OUTPUTS.registry, registryUri);
+        //core.setOutput(OUTPUTS.registry, registryUri);
+        fs.appendFileSync(process.env.GITHUB_OUTPUT, 'registry=' + registryUri + '\n');
       }
 
       // Execute the docker login command
