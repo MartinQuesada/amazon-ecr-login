@@ -135,8 +135,10 @@ async function run() {
       // Output docker username and password
       const secretSuffix = replaceSpecialCharacters(registryUri);
       core.setSecret(creds[1]);
-      core.setOutput(`${OUTPUTS.dockerUsername}_${secretSuffix}`, creds[0]);
-      core.setOutput(`${OUTPUTS.dockerPassword}_${secretSuffix}`, creds[1]);
+      //core.setOutput(`${OUTPUTS.dockerUsername}_${secretSuffix}`, creds[0]);
+      fs.appendFileSync(process.env.GITHUB_OUTPUT, 'dockerUsername=' creds[0] + '\n');
+      //core.setOutput(`${OUTPUTS.dockerPassword}_${secretSuffix}`, creds[1]);
+      fs.appendFileSync(process.env.GITHUB_OUTPUT, 'dockerPassword=' creds[1] + '\n');
 
       registryUriState.push(registryUri);
     }
